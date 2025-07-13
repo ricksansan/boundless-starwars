@@ -3,6 +3,7 @@ const boundlessEpisodes = [
     {
         episode: "EPISODE I",
         title: "THE AGE OF SHADOWS",
+        showMainTitle: true,
         text: `A long time ago, in a blockchain far, far away…
 
 Across the galaxy, mighty chains had risen.
@@ -21,6 +22,7 @@ On-chain computations shackled the chain with massive transaction blocks, turnin
     {
         episode: "EPISODE II",
         title: "THE FORBIDDEN KNOWLEDGE",
+        showMainTitle: false,
         text: `Some engineers, digging through dark libraries, stumbled upon ancient secrets.
 The Zero-Knowledge spells:
 • SNARKs,
@@ -37,6 +39,7 @@ Ordinary developers stood outside the temple gates, never allowed to enter the s
     {
         episode: "EPISODE III",
         title: "THE DAWN OF BOUNDLESS",
+        showMainTitle: false,
         text: `And in this age of darkness, a call echoed from distant star systems:
 
 "Boundless is coming…"
@@ -59,6 +62,7 @@ Privacy was sanctified.`
     {
         episode: "EPISODE IV",
         title: "THE AGE OF PROVERS",
+        showMainTitle: false,
         text: `Boundless built an army.
 This legion spread across every corner of the chain, made up of thousands of prover nodes.
 
@@ -76,6 +80,7 @@ They could only see that it was "done correctly."`
     {
         episode: "EPISODE V",
         title: "THE WAR FOR PRIVACY",
+        showMainTitle: false,
         text: `Boundless began to transform the chains.
 Now on-chain there were:
 • Private voting protocols,
@@ -91,6 +96,7 @@ With Boundless, even a young coder knowing only Rust could perform massive zk co
     {
         episode: "EPISODE VI",
         title: "THE BOUNDLESS FUTURE",
+        showMainTitle: false,
         text: `Today the galaxy is still expanding.
 Boundless has erased the borders of chains.
 Multi-chain corridors, cross-rollup portals have opened under the light of zkVM.
@@ -109,18 +115,157 @@ ALWAYS.`
 
 let currentEpisode = 0;
 
+// Fonksiyonları önce tanımla
+function changeText(newText) {
+    const textDiv = document.querySelector('.text');
+    if (newText && typeof newText === 'string') {
+        // Metni paragraflara böl
+        const paragraphs = newText.split('\n').filter(p => p.trim());
+        textDiv.innerHTML = paragraphs.map(p => {
+            if (p.startsWith('•')) {
+                return `<p style="margin-left: 20px;">${p}</p>`;
+            }
+            return `<p>${p}</p>`;
+        }).join('');
+    }
+}
+
+function changeTitle(newTitle, newSubtitle, newEpisode, showMainTitle = false) {
+    const title = document.querySelector('.title h1');
+    const subtitle = document.querySelector('.subtitle h2');
+    const episode = document.querySelector('.subtitle h3');
+    
+    if (newTitle) title.textContent = newTitle.toUpperCase();
+    if (newSubtitle) subtitle.textContent = newSubtitle;
+    if (newEpisode) episode.textContent = newEpisode.toUpperCase();
+    
+    // BOUNDLESS başlığını sadece showMainTitle true olduğunda göster
+    if (showMainTitle) {
+        title.style.display = 'block';
+        title.style.opacity = '1';
+    } else {
+        // Diğer tüm bölümlerde direkt gizle (animasyon yok)
+        title.style.display = 'none';
+        title.style.opacity = '0';
+        // Transition'ı geçici olarak kaldır
+        title.style.transition = 'none';
+        // Kısa bir süre sonra transition'ı geri ekle
+        setTimeout(() => {
+            title.style.transition = 'opacity 0.5s ease';
+        }, 10);
+    }
+}
+
+function resetAnimation() {
+    const crawl = document.querySelector('.crawl');
+    
+    // Animasyonu durdur ama pozisyonu koru
+    crawl.style.animationPlayState = 'paused';
+    
+    // Animasyonu yeniden başlat ama pozisyonu sıfırlama
+    crawl.style.animation = 'crawl 35s linear infinite';
+    
+    // Animasyonu hemen çalıştır
+    crawl.style.animationPlayState = 'running';
+}
+
+function loadEpisode(episodeIndex) {
+    const episode = boundlessEpisodes[episodeIndex];
+    changeTitle("BOUNDLESS", episode.episode, episode.title, episode.showMainTitle);
+    changeText(episode.text);
+    
+    // Animasyon süresini bölüm içeriğine göre ayarla
+    const textLength = episode.text.length;
+    const animationDuration = Math.max(25, Math.min(45, textLength / 10)); // 25-45 saniye arası
+    
+    const crawl = document.querySelector('.crawl');
+    crawl.style.animationDuration = animationDuration + 's';
+    
+    console.log(`Bölüm ${episodeIndex + 1} süresi: ${animationDuration}s`);
+}
+
+function nextEpisode() {
+    currentEpisode = (currentEpisode + 1) % boundlessEpisodes.length;
+    loadEpisode(currentEpisode);
+}
+
+function previousEpisode() {
+    currentEpisode = (currentEpisode - 1 + boundlessEpisodes.length) % boundlessEpisodes.length;
+    loadEpisode(currentEpisode);
+}
+
+// Global fonksiyonları window objesine ekle
+window.changeText = changeText;
+window.changeTitle = changeTitle;
+window.changeSpeed = function(seconds) {
+    const crawl = document.querySelector('.crawl');
+    crawl.style.animationDuration = seconds + 's';
+};
+window.nextEpisode = nextEpisode;
+window.previousEpisode = previousEpisode;
+window.loadEpisode = loadEpisode;
+window.resetAnimation = resetAnimation;
+
 // Sayfa yüklendiğinde çalışacak fonksiyon
 document.addEventListener('DOMContentLoaded', function() {
-    // Animasyon başlangıcında kısa bir bekleme
-    setTimeout(() => {
-        const crawl = document.querySelector('.crawl');
-        crawl.style.animationPlayState = 'running';
-    }, 1000);
+    // İlk chapter'ı yükle
+    loadEpisode(0);
+    
+    // Animasyonu başlat
+    const crawl = document.querySelector('.crawl');
+    crawl.style.animationPlayState = 'running';
+
+    // Müzik kontrolleri
+    const musicToggle = document.getElementById('musicToggle');
+    const volumeSlider = document.getElementById('volumeSlider');
+    const backgroundMusic = document.getElementById('backgroundMusic');
+    
+    let isMusicPlaying = false;
+    
+    // Müzik yükleme kontrolü
+    backgroundMusic.addEventListener('loadstart', function() {
+        console.log('Müzik yüklenmeye başladı');
+    });
+    
+    backgroundMusic.addEventListener('canplay', function() {
+        console.log('Müzik çalmaya hazır');
+        musicToggle.textContent = '🔇';
+    });
+    
+    backgroundMusic.addEventListener('error', function(e) {
+        console.error('Müzik yükleme hatası:', e);
+        musicToggle.textContent = '❌';
+    });
+    
+    // Müzik toggle butonu
+    musicToggle.addEventListener('click', function() {
+        if (isMusicPlaying) {
+            backgroundMusic.pause();
+            musicToggle.textContent = '🔇';
+            isMusicPlaying = false;
+        } else {
+            // Kullanıcı etkileşimi sonrası müziği başlat
+            backgroundMusic.play().then(() => {
+                musicToggle.textContent = '🔊';
+                isMusicPlaying = true;
+                console.log('Müzik başlatıldı');
+            }).catch(e => {
+                console.error('Müzik başlatılamadı:', e);
+                musicToggle.textContent = '❌';
+            });
+        }
+    });
+    
+    // Ses seviyesi kontrolü
+    volumeSlider.addEventListener('input', function() {
+        backgroundMusic.volume = this.value / 100;
+    });
+    
+    // Sayfa yüklendiğinde müziği hazırla
+    backgroundMusic.load();
 
     // Klavye kontrolleri
     document.addEventListener('keydown', function(e) {
-        const crawl = document.querySelector('.crawl');
-        
         // Boşluk tuşu ile animasyonu durdur/başlat
         if (e.code === 'Space') {
             e.preventDefault();
@@ -148,73 +293,21 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             previousEpisode();
         }
+        
+        // M tuşu ile müziği aç/kapat
+        if (e.code === 'KeyM') {
+            e.preventDefault();
+            musicToggle.click();
+        }
     });
 
     // Animasyon bittiğinde otomatik olarak sonraki bölüme geç
-    const crawl = document.querySelector('.crawl');
     crawl.addEventListener('animationiteration', function() {
+        // Animasyon bittiğinde hemen sonraki bölüme geç
         setTimeout(() => {
             nextEpisode();
-        }, 2000); // 2 saniye bekle
+        }, 100); // Sadece 100ms bekle
     });
-
-    // Metin değiştirme fonksiyonu (global olarak erişilebilir)
-    window.changeText = function(newText) {
-        const textDiv = document.querySelector('.text');
-        if (newText && typeof newText === 'string') {
-            // Metni paragraflara böl
-            const paragraphs = newText.split('\n').filter(p => p.trim());
-            textDiv.innerHTML = paragraphs.map(p => {
-                if (p.startsWith('•')) {
-                    return `<p style="margin-left: 20px;">${p}</p>`;
-                }
-                return `<p>${p}</p>`;
-            }).join('');
-        }
-    };
-
-    // Başlık değiştirme fonksiyonu
-    window.changeTitle = function(newTitle, newSubtitle, newEpisode) {
-        const title = document.querySelector('.title h1');
-        const subtitle = document.querySelector('.subtitle h2');
-        const episode = document.querySelector('.subtitle h3');
-        
-        if (newTitle) title.textContent = newTitle.toUpperCase();
-        if (newSubtitle) subtitle.textContent = newSubtitle;
-        if (newEpisode) episode.textContent = newEpisode.toUpperCase();
-    };
-
-    // Animasyon hızını değiştirme fonksiyonu
-    window.changeSpeed = function(seconds) {
-        const crawl = document.querySelector('.crawl');
-        crawl.style.animationDuration = seconds + 's';
-    };
-
-    // Bölüm değiştirme fonksiyonları
-    window.nextEpisode = function() {
-        currentEpisode = (currentEpisode + 1) % boundlessEpisodes.length;
-        loadEpisode(currentEpisode);
-    };
-
-    window.previousEpisode = function() {
-        currentEpisode = (currentEpisode - 1 + boundlessEpisodes.length) % boundlessEpisodes.length;
-        loadEpisode(currentEpisode);
-    };
-
-    window.loadEpisode = function(episodeIndex) {
-        const episode = boundlessEpisodes[episodeIndex];
-        changeTitle("BOUNDLESS", episode.episode, episode.title);
-        changeText(episode.text);
-        resetAnimation();
-    };
-
-    window.resetAnimation = function() {
-        const crawl = document.querySelector('.crawl');
-        crawl.style.animation = 'none';
-        setTimeout(() => {
-            crawl.style.animation = 'crawl 35s linear infinite';
-        }, 10);
-    };
 
     // Kullanım talimatlarını konsola yazdır
     console.log('Boundless Star Wars Kontrolleri:');
@@ -222,7 +315,9 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('- R tuşu: Animasyonu sıfırla');
     console.log('- Sağ ok: Sonraki bölüm');
     console.log('- Sol ok: Önceki bölüm');
+    console.log('- M tuşu: Müziği aç/kapat');
     console.log('- nextEpisode(): Sonraki bölüme geç');
     console.log('- previousEpisode(): Önceki bölüme geç');
     console.log('- loadEpisode(0-5): Belirli bölümü yükle');
+    console.log('🎵 Müzik dosyasını assets/star-wars-theme.mp3 olarak ekleyin!');
 }); 

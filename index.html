@@ -8,6 +8,21 @@
 </head>
 <body>
     <div class="container">
+        <img src="assets/boundless-logo.png" alt="Boundless Logo" class="boundless-logo" />
+        
+        <!-- Müzik Kontrolleri -->
+        <div class="music-controls">
+            <button id="musicToggle" class="music-btn">🔇</button>
+            <input type="range" id="volumeSlider" min="0" max="100" value="50" class="volume-slider">
+        </div>
+        
+        <!-- Müzik Dosyası -->
+        <audio id="backgroundMusic" loop preload="auto">
+            <source src="assets/star-wars-theme.mp3" type="audio/mpeg">
+            <source src="assets/star-wars-theme.ogg" type="audio/ogg">
+            Tarayıcınız müzik dosyasını desteklemiyor.
+        </audio>
+        
         <div class="star-wars-intro">
             <div class="crawl">
                 <div class="title">

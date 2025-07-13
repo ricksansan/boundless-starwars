@@ -40,6 +40,7 @@ body {
     transform: rotateX(45deg);
     transform-origin: center bottom;
     animation: crawl 35s linear infinite;
+    animation-play-state: running;
 }
 
 .title h1 {
@@ -48,23 +49,24 @@ body {
     margin-bottom: 1em;
     text-shadow: 0 0 10px #FFE81F;
     letter-spacing: 0.2em;
+    transition: opacity 0.5s ease;
 }
 
 .subtitle h2 {
     font-size: 2em;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.3em;
     text-shadow: 0 0 8px #FFE81F;
 }
 
 .subtitle h3 {
     font-size: 2.5em;
-    margin-bottom: 2em;
+    margin-bottom: 1em;
     text-shadow: 0 0 8px #FFE81F;
     letter-spacing: 0.1em;
 }
 
 .text p {
-    margin-bottom: 1.5em;
+    margin-bottom: 1.2em;
     text-shadow: 0 0 5px #FFE81F;
     font-size: 1.1em;
 }
@@ -74,7 +76,7 @@ body {
         transform: rotateX(45deg) translateY(100vh);
     }
     100% {
-        transform: rotateX(45deg) translateY(-100vh);
+        transform: rotateX(45deg) translateY(-200vh);
     }
 }
 
@@ -105,6 +107,72 @@ body {
     100% {
         transform: translateY(-100px);
     }
+}
+
+.boundless-logo {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    width: 64px;
+    height: 64px;
+    opacity: 0.85;
+    z-index: 10;
+    pointer-events: none;
+}
+
+/* Müzik Kontrolleri */
+.music-controls {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 20;
+}
+
+.music-btn {
+    background: rgba(255, 232, 31, 0.2);
+    border: 2px solid #FFE81F;
+    color: #FFE81F;
+    font-size: 20px;
+    padding: 8px 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.music-btn:hover {
+    background: rgba(255, 232, 31, 0.3);
+    transform: scale(1.1);
+}
+
+.volume-slider {
+    width: 80px;
+    height: 4px;
+    background: rgba(255, 232, 31, 0.3);
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background: #FFE81F;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.volume-slider::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background: #FFE81F;
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
 }
 
 /* Responsive tasarım */
