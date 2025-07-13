@@ -7,14 +7,27 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="intro-boundless">
+        <span>BOUNDLESS</span>
+    </div>
     <div class="container">
-        <img src="assets/boundless-logo.png" alt="Boundless Logo" class="boundless-logo" />
+        <div class="logo-title">
+            <img src="assets/boundless-logo.png" alt="Boundless Logo" class="boundless-logo" />
+            <span class="boundless-title">Boundless</span>
+        </div>
         
         <!-- Müzik Kontrolleri -->
         <div class="music-controls">
             <button id="musicToggle" class="music-btn">🔇</button>
             <input type="range" id="volumeSlider" min="0" max="100" value="50" class="volume-slider">
             <a href="https://twitter.com/ex_machinam" target="_blank" class="social-btn">𝕏</a>
+        </div>
+        
+        <!-- Hızlandırma Kontrolü -->
+        <div class="speed-controls">
+            <label for="speedSlider">Speed:</label>
+            <input type="range" id="speedSlider" min="30" max="120" value="60" class="speed-slider" step="1">
+            <span id="speedValue">60s</span>
         </div>
         
         <!-- Müzik Dosyası -->
@@ -29,15 +42,74 @@
                 <div class="title">
                     <h1>BOUNDLESS</h1>
                 </div>
-                <div class="subtitle">
-                    <h2>EPISODE I</h2>
-                    <h3>THE AGE OF SHADOWS</h3>
-                </div>
-                <div class="text">
-                    <p>A long time ago, in a blockchain far, far away…</p>
-                    <p>Across the galaxy, mighty chains had risen. The ancient citadels of Ethereum, the lightning lanes of Solana, the polygonal legions of Polygon… All were competing to become the ultimate center of power.</p>
-                    <p>But behind this dazzling brilliance of chains lurked a deep darkness. Every transaction was visible to all; secrets lay naked for the world to see. Who did what, which wallet held which fortune, which contract authorized what — all of it etched onto the chain.</p>
-                    <p>And the chain was crawling under the claws of greedy miners and validator barons. Gas fees were sky-high. Privacy was extinct. On-chain computations shackled the chain with massive transaction blocks, turning it into a lumbering beast.</p>
+                <div class="content">
+                    <div class="episode">
+                        <h2>EPISODE I</h2>
+                        <h3>THE AGE OF SHADOWS</h3>
+                        <p>A long time ago, in a blockchain far, far away…</p>
+                        <p>Across the galaxy, mighty chains had risen. The ancient citadels of Ethereum, the lightning lanes of Solana, the polygonal legions of Polygon… All were competing to become the ultimate center of power.</p>
+                        <p>But behind this dazzling brilliance of chains lurked a deep darkness. Every transaction was visible to all; secrets lay naked for the world to see. Who did what, which wallet held which fortune, which contract authorized what — all of it etched onto the chain.</p>
+                        <p>And the chain was crawling under the claws of greedy miners and validator barons. Gas fees were sky-high. Privacy was extinct. On-chain computations shackled the chain with massive transaction blocks, turning it into a lumbering beast.</p>
+                    </div>
+                    
+                    <div class="episode">
+                        <h2>EPISODE II</h2>
+                        <h3>THE FORBIDDEN KNOWLEDGE</h3>
+                        <p>Some engineers, digging through dark libraries, stumbled upon ancient secrets. The Zero-Knowledge spells:</p>
+                        <p>• SNARKs,</p>
+                        <p>• STARKs,</p>
+                        <p>• Groth16 incantations.</p>
+                        <p>These cryptographic arcana could prove correctness while preserving secrecy. But… These spells were so complex: Elliptic curves, constraint systems, circuit DSLs… Only a handful of cryptographers could speak this arcane tongue. Ordinary developers stood outside the temple gates, never allowed to enter the sacred halls of zk.</p>
+                    </div>
+                    
+                    <div class="episode">
+                        <h2>EPISODE III</h2>
+                        <h3>THE DAWN OF BOUNDLESS</h3>
+                        <p>And in this age of darkness, a call echoed from distant star systems:</p>
+                        <p>"Boundless is coming…"</p>
+                        <p>Boundless forged a mighty virtual machine, called zkVM. This machine was trained to understand Rust and Solidity. Now even a simple developer could write a program in Rust; and Boundless, with its magical hands, would turn it into zk-proofs.</p>
+                        <p>No longer:</p>
+                        <p>• Millions of lines of zk circuits,</p>
+                        <p>• Days of parameter crunching.</p>
+                        <p>Instead, the chain offloaded heavy computations off-chain; only a succinct, verifiable proof reached the chain.</p>
+                        <p>Gas costs fell. Speeds soared. Privacy was sanctified.</p>
+                    </div>
+                    
+                    <div class="episode">
+                        <h2>EPISODE IV</h2>
+                        <h3>THE AGE OF PROVERS</h3>
+                        <p>Boundless built an army. This legion spread across every corner of the chain, made up of thousands of prover nodes.</p>
+                        <p>Each node:</p>
+                        <p>• Executed your program,</p>
+                        <p>• Captured the execution trace step by step,</p>
+                        <p>• Sealed it with STARK polynomials,</p>
+                        <p>• Then compressed these colossal proofs into tiny Groth16 SNARKs.</p>
+                        <p>And only this little proof traveled to the chain. It was etched into the ancient ledgers, but no one could ever see your transaction's details. They could only see that it was "done correctly."</p>
+                    </div>
+                    
+                    <div class="episode">
+                        <h2>EPISODE V</h2>
+                        <h3>THE WAR FOR PRIVACY</h3>
+                        <p>Boundless began to transform the chains. Now on-chain there were:</p>
+                        <p>• Private voting protocols,</p>
+                        <p>• Financial apps where who sent what to whom remained hidden,</p>
+                        <p>• Games with zk ensuring zero cheating.</p>
+                        <p>The old lords of the chains — soaring gas fees and data-leaking auditors — were driven back. Privacy became the standard, verifiability an everyday feature.</p>
+                        <p>And most importantly, from tiny villages to the grand metaverse cities, everyone could wield this technology. With Boundless, even a young coder knowing only Rust could perform massive zk computations and submit proofs to the chain.</p>
+                    </div>
+                    
+                    <div class="episode">
+                        <h2>EPISODE VI</h2>
+                        <h3>THE BOUNDLESS FUTURE</h3>
+                        <p>Today the galaxy is still expanding. Boundless has erased the borders of chains. Multi-chain corridors, cross-rollup portals have opened under the light of zkVM.</p>
+                        <p>Now, beyond the chains, lies an even greater horizon:</p>
+                        <p>• Verifiable compute,</p>
+                        <p>• Privacy by default,</p>
+                        <p>• Infinite scalability.</p>
+                        <p>And all this was made possible by developers chasing a dream called Boundless.</p>
+                        <p>THE FORCE OF ZERO-KNOWLEDGE WILL BE WITH YOU. ALWAYS.</p>
+                        <p style="font-size:2em; margin-top:2em;">A NEW ERA BEGINS.</p>
+                    </div>
                 </div>
             </div>
         </div>

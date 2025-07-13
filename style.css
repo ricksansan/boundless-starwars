@@ -27,6 +27,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    visibility: hidden;
 }
 
 .crawl {
@@ -39,7 +40,7 @@ body {
     line-height: 1.5;
     transform: rotateX(45deg);
     transform-origin: center bottom;
-    animation: crawl 35s linear infinite;
+    animation: crawl 60s linear forwards;
     animation-play-state: running;
 }
 
@@ -73,10 +74,10 @@ body {
 
 @keyframes crawl {
     0% {
-        transform: rotateX(45deg) translateY(100vh);
+        transform: rotateX(45deg) translateY(140vh);
     }
     100% {
-        transform: rotateX(45deg) translateY(-200vh);
+        transform: rotateX(45deg) translateY(-400vh);
     }
 }
 
@@ -109,15 +110,32 @@ body {
     }
 }
 
-.boundless-logo {
+.logo-title {
     position: fixed;
     top: 16px;
     left: 16px;
-    width: 64px;
-    height: 64px;
+    display: flex;
+    align-items: center;
+    z-index: 11;
+}
+
+.boundless-logo {
+    position: static;
+    width: 48px;
+    height: 48px;
     opacity: 0.85;
-    z-index: 10;
     pointer-events: none;
+}
+
+.boundless-title {
+    color: #bdbdbd;
+    font-size: 1.2em;
+    font-family: 'Arial Black', Arial, sans-serif;
+    font-weight: bold;
+    margin-left: 12px;
+    letter-spacing: 0.08em;
+    text-shadow: 0 0 8px #222;
+    user-select: none;
 }
 
 /* Müzik Kontrolleri */
@@ -148,31 +166,70 @@ body {
     transform: scale(1.1);
 }
 
+/* Safari ve Webkit için */
+.speed-slider,
 .volume-slider {
-    width: 80px;
-    height: 4px;
+    -webkit-appearance: none;
+    appearance: none;
     background: rgba(255, 232, 31, 0.3);
+    height: 4px;
     border-radius: 2px;
     outline: none;
     cursor: pointer;
 }
 
+.speed-slider::-webkit-slider-thumb,
 .volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
     appearance: none;
     width: 16px;
     height: 16px;
     background: #FFE81F;
     border-radius: 50%;
     cursor: pointer;
+    border: 2px solid #fff;
+    box-shadow: 0 0 8px #FFE81F;
+    transition: background 0.3s;
 }
 
+.speed-slider::-webkit-slider-thumb:hover,
+.volume-slider::-webkit-slider-thumb:hover {
+    background: #fffde4;
+}
+
+.speed-slider::-moz-range-thumb,
 .volume-slider::-moz-range-thumb {
     width: 16px;
     height: 16px;
     background: #FFE81F;
     border-radius: 50%;
     cursor: pointer;
-    border: none;
+    border: 2px solid #fff;
+    box-shadow: 0 0 8px #FFE81F;
+    transition: background 0.3s;
+}
+
+.speed-slider::-moz-range-thumb:hover,
+.volume-slider::-moz-range-thumb:hover {
+    background: #fffde4;
+}
+
+.speed-slider::-ms-thumb,
+.volume-slider::-ms-thumb {
+    width: 16px;
+    height: 16px;
+    background: #FFE81F;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid #fff;
+    box-shadow: 0 0 8px #FFE81F;
+    transition: background 0.3s;
+}
+
+.speed-slider:focus,
+.volume-slider:focus {
+    outline: none;
+    box-shadow: 0 0 4px #FFE81F;
 }
 
 .social-btn {
@@ -198,6 +255,47 @@ body {
     background: rgba(255, 232, 31, 0.3);
     transform: scale(1.1);
     color: #FFE81F;
+}
+
+/* Hızlandırma Kontrolleri */
+.speed-controls {
+    position: fixed;
+    top: 80px;
+    right: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 20;
+    color: #FFE81F;
+    font-size: 14px;
+}
+
+/* Episode Stilleri */
+.episode {
+    margin-bottom: 3em;
+}
+
+.episode h2 {
+    font-size: 2em;
+    margin-bottom: 0.3em;
+    text-shadow: 0 0 8px #FFE81F;
+}
+
+.episode h3 {
+    font-size: 2.5em;
+    margin-bottom: 1.5em;
+    text-shadow: 0 0 8px #FFE81F;
+    letter-spacing: 0.1em;
+}
+
+.episode p {
+    margin-bottom: 1.2em;
+    text-shadow: 0 0 5px #FFE81F;
+    font-size: 1.1em;
+}
+
+.episode p:first-of-type {
+    margin-top: 0;
 }
 
 /* Responsive tasarım */
@@ -244,4 +342,46 @@ body {
     .text p {
         font-size: 0.8em;
     }
+} 
+
+.intro-boundless {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    background: transparent;
+    animation: boundless-intro 3s cubic-bezier(0.4,0,0.2,1) 0s 1 forwards;
+}
+.intro-boundless span {
+    color: #000; /* Safari için içi siyah yap */
+    font-size: 8vw;
+    font-family: 'Arial Black', Arial, sans-serif;
+    letter-spacing: 0.2em;
+    font-weight: bold;
+    -webkit-text-stroke: 4px #FFE81F;
+    text-stroke: 4px #FFE81F;
+    text-shadow:
+        0 0 40px #FFE81F,
+        0 0 80px #FFE81F,
+        0 0 0 #FFE81F, /* Safari için ekstra shadow */
+        0 0 2px #FFE81F;
+    opacity: 0.95;
+    transform: scale(0.6);
+    animation: boundless-text-in 3s cubic-bezier(0.4,0,0.2,1) 0s 1 forwards;
+}
+@keyframes boundless-intro {
+    0%   { opacity: 0; }
+    10%  { opacity: 1; }
+    80%  { opacity: 1; }
+    100% { opacity: 0; visibility: hidden; }
+}
+@keyframes boundless-text-in {
+    0%   { opacity: 0; transform: scale(0.6);}
+    10%  { opacity: 1; transform: scale(1.1);}
+    30%  { opacity: 1; transform: scale(1);}
+    80%  { opacity: 1; transform: scale(1);}
+    100% { opacity: 0; transform: scale(1);}
 } 
