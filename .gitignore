@@ -1,0 +1,14 @@
+# Sistem dosyaları
+.DS_Store
+Thumbs.db
+
+# IDE dosyaları
+.vscode/
+.idea/
+
+# Log dosyaları
+*.log
+
+# Geçici dosyalar
+*.tmp
+*.temp 

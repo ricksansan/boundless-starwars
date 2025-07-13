@@ -1,0 +1,154 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #000;
+    font-family: 'Arial', sans-serif;
+    overflow: hidden;
+    height: 100vh;
+}
+
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 400px;
+}
+
+.star-wars-intro {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.crawl {
+    position: relative;
+    width: 80%;
+    max-width: 800px;
+    text-align: center;
+    color: #FFE81F;
+    font-size: 1.2em;
+    line-height: 1.5;
+    transform: rotateX(45deg);
+    transform-origin: center bottom;
+    animation: crawl 35s linear infinite;
+}
+
+.title h1 {
+    font-size: 4em;
+    font-weight: bold;
+    margin-bottom: 1em;
+    text-shadow: 0 0 10px #FFE81F;
+    letter-spacing: 0.2em;
+}
+
+.subtitle h2 {
+    font-size: 2em;
+    margin-bottom: 0.5em;
+    text-shadow: 0 0 8px #FFE81F;
+}
+
+.subtitle h3 {
+    font-size: 2.5em;
+    margin-bottom: 2em;
+    text-shadow: 0 0 8px #FFE81F;
+    letter-spacing: 0.1em;
+}
+
+.text p {
+    margin-bottom: 1.5em;
+    text-shadow: 0 0 5px #FFE81F;
+    font-size: 1.1em;
+}
+
+@keyframes crawl {
+    0% {
+        transform: rotateX(45deg) translateY(100vh);
+    }
+    100% {
+        transform: rotateX(45deg) translateY(-100vh);
+    }
+}
+
+/* Yıldızlar için arka plan efekti */
+.container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(2px 2px at 20px 30px, #eee, transparent),
+        radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+        radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.6), transparent),
+        radial-gradient(2px 2px at 160px 30px, #ddd, transparent);
+    background-repeat: repeat;
+    background-size: 200px 100px;
+    animation: stars 20s linear infinite;
+    z-index: -1;
+}
+
+@keyframes stars {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-100px);
+    }
+}
+
+/* Responsive tasarım */
+@media (max-width: 768px) {
+    .crawl {
+        width: 95%;
+        font-size: 1em;
+    }
+    
+    .title h1 {
+        font-size: 2.5em;
+    }
+    
+    .subtitle h2 {
+        font-size: 1.5em;
+    }
+    
+    .subtitle h3 {
+        font-size: 1.8em;
+    }
+    
+    .text p {
+        font-size: 0.9em;
+    }
+}
+
+@media (max-width: 480px) {
+    .crawl {
+        font-size: 0.8em;
+    }
+    
+    .title h1 {
+        font-size: 2em;
+    }
+    
+    .subtitle h2 {
+        font-size: 1.2em;
+    }
+    
+    .subtitle h3 {
+        font-size: 1.4em;
+    }
+    
+    .text p {
+        font-size: 0.8em;
+    }
+} 
