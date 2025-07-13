@@ -118,4 +118,19 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('- M tuşu: Müziği aç/kapat');
     console.log('- Hızlandırma çubuğu: Animasyon hızını ayarla (30-120s)');
     console.log('🎵 Müzik dosyasını assets/star-wars-theme.mp3 olarak ekleyin!');
+
+    // Pause/Play butonu
+    const pauseToggle = document.getElementById('pauseToggle');
+    let isPaused = false;
+    pauseToggle.addEventListener('click', function() {
+        if (isPaused) {
+            crawl.style.animationPlayState = 'running';
+            pauseToggle.textContent = '⏸️';
+            isPaused = false;
+        } else {
+            crawl.style.animationPlayState = 'paused';
+            pauseToggle.textContent = '▶️';
+            isPaused = true;
+        }
+    });
 }); 

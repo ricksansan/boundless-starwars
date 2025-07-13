@@ -385,3 +385,68 @@ body {
     80%  { opacity: 1; transform: scale(1);}
     100% { opacity: 0; transform: scale(1);}
 } 
+
+.pause-btn {
+    background: rgba(255, 232, 31, 0.2);
+    border: 2px solid #FFE81F;
+    color: #FFE81F;
+    font-size: 22px;
+    padding: 8px 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-left: 0;
+    margin-top: 12px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 120px;
+    right: 16px;
+    z-index: 21;
+}
+.pause-btn:hover {
+    background: rgba(255, 232, 31, 0.3);
+    transform: scale(1.1);
+    color: #FFE81F;
+} 
+
+.music-btn,
+.social-btn,
+.pause-btn {
+    font-size: 16px;
+    padding: 4px 7px;
+    width: 32px;
+    height: 32px;
+}
+
+.social-btn,
+.music-btn,
+.pause-btn {
+    min-width: 32px;
+    min-height: 32px;
+    max-width: 32px;
+    max-height: 32px;
+}
+
+.speed-controls {
+    font-size: 12px;
+    gap: 6px;
+}
+
+.speed-slider,
+.volume-slider {
+    height: 3px;
+    width: 70px;
+}
+
+.speed-slider::-webkit-slider-thumb,
+.volume-slider::-webkit-slider-thumb,
+.speed-slider::-moz-range-thumb,
+.volume-slider::-moz-range-thumb,
+.speed-slider::-ms-thumb,
+.volume-slider::-ms-thumb {
+    width: 12px;
+    height: 12px;
+} 
